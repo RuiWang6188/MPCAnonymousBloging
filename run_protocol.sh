@@ -13,7 +13,7 @@
 
 for i in $(seq "${1}" 1 "${2}");
 do
-	./MPCAnonymousBloging  -l 44 -partyID "${i}" -numServers "${3}" -partiesNumber "${3}" -numClients "${4}"  -fieldType ZpMersenne31 \
+	./MPCAnonymousBloging  -l 160 -partyID "${i}" -numServers "${3}" -partiesNumber "${3}" -numClients "${4}"  -fieldType ZpMersenne31 \
 	 -partiesFile "${5}"  -internalIterationsNumber 1 -numThreads "${6}" -T "${7}" -toUmount "${8}"  -toSimulate "${9}" &
 	echo "Running $i..."
 done
