@@ -19,3 +19,6 @@ cd $HOME
 git clone https://github.com/cryptobiu/libscapi.git
 cd libscapi
 make
+
+cd $HOME/MPCAnonymousBloging
+./MATRIX/build.sh
