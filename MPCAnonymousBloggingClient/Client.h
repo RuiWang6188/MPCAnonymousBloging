@@ -75,16 +75,16 @@ Client<FieldType>::Client(int argc, char **argv){
     prg.setKey(key);
 
     string dir = string(getenv("HOME")) + "/files"+to_string(numClients);
-    int check = mkdir(dir.c_str(), S_IRWXU | S_IRWXG | S_IRWXO);
-    if (!check){
-        cout<<"Directory created"<<endl;
-    } else {
-        cout<<"Unable to create directory"<<endl;
-        exit(1);
-    }
+    // int check = mkdir(dir.c_str(), S_IRWXU | S_IRWXG | S_IRWXO);
+    // if (!check){
+    //     cout<<"Directory created"<<endl;
+    // } else {
+    //     cout<<"Unable to create directory"<<endl;
+    //     exit(1);
+    // }
     if (toMount) {
         string command = "mount -t tmpfs tmpfs " + dir;
-        check = system(command.c_str());
+        int check = system(command.c_str());
         if (!check) {
             cout << "mount created" << endl;
         } else {
@@ -230,6 +230,13 @@ void Client<FieldType>::writeServersFiles(vector<vector<FieldType>> & shares, in
 
     ofstream outputFile;
      int size = 2*(l*sqrtR) + sqrtR + sqrtU + 1;
+    string fileName = string(getenv("HOME")) + "/files"+to_string(numClients) + "/server" + to_string(server) + "ForClient" + to_string(clientID) +
+        "inputs.bin";
+
+    cout << "field->getElementSizeInBytes(): " << field->getElementSizeInBytes() << endl;
+
+    cout << "size: " << size << endl;
+    cout << "shares.size(): " << shares[0].size() << endl;
 
     if (server != 1000) {
         if (field->getElementSizeInBytes() == 8) {
@@ -237,9 +244,14 @@ void Client<FieldType>::writeServersFiles(vector<vector<FieldType>> & shares, in
             outputFile.open(
                     string(getenv("HOME")) + "/files"+to_string(numClients) + "/server" + to_string(server) + "ForClient" + to_string(clientID) +
                     "inputs.bin", ios::out | ios::binary);
-
-            for (int j = 0; j < size; j++) {
-                outputFile << serverShares[j] << endl;
+            if (outputFile.is_open()) {
+                for (int j = 0; j < size; j++) {
+                    outputFile << serverShares[j] << endl;
+                }
+                cout << "write file success" <<endl;
+            }
+            else {
+                std::cout << "Failed to open the file: " << fileName << std::endl;
             }
         }
         if (field->getElementSizeInBytes() == 4) {
@@ -247,8 +259,17 @@ void Client<FieldType>::writeServersFiles(vector<vector<FieldType>> & shares, in
             outputFile.open(
                     string(getenv("HOME")) + "/files"+to_string(numClients) + "/server" + to_string(server) + "ForClient" + to_string(clientID) +
                     "inputs.bin", ios::out | ios::binary);
-
-            outputFile.write((char *) serverShares, 4 * size);
+            if (outputFile.is_open()) {
+                outputFile.write((char *) serverShares, 4 * size);
+                if (outputFile.fail()) {
+                    cout << "Error writing to file" << endl;
+                } else {
+                    cout << "Write file success" << endl;
+                }
+            }
+            else {
+                std::cout << "Failed to open the file: " << fileName << std::endl;
+            }
 
         }
         outputFile.close();

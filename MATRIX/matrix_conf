@@ -96,3 +96,7 @@ experiment 4 - large messages, CPU/GPU
 
 
 
+
+
+# minPartyId maxPartyId #server(#parties) #clients #threads T(#malicious parties) ToUmount
+0 99 5 95 10 0 false
