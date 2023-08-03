@@ -376,7 +376,7 @@ ProtocolParty<FieldType>::ProtocolParty(int argc, char* argv[]) : MPCProtocol("M
     toUmount = (this->getParser().getValueByKey(arguments, "toUmount").compare("true") == 0);
     toSimulate = (this->getParser().getValueByKey(arguments, "toSimulate").compare("true") == 0);
 
-    //// cout << "toSimulate: " << toSimulate << endl;
+    // cout << "toSimulate: " << toSimulate << endl;
 
     vector<string> subTaskNames{"Offline", "preparationPhase", "Online", "inputPhase", "ComputePhase",
                                 "VerificationPhase", "outputPhase", "generateSharedMatricesOptimized",
@@ -427,7 +427,7 @@ ProtocolParty<FieldType>::ProtocolParty(int argc, char* argv[]) : MPCProtocol("M
 
     auto duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds initializationPhase: " << duration << endl;
+        cout << "time in milliseconds initializationPhase: " << duration << endl;
     }
 
     shiftbyOne.resize(securityParamter);
@@ -467,7 +467,7 @@ void ProtocolParty<FieldType>::run() {
         auto t2end = high_resolution_clock::now();
         auto duration = duration_cast<milliseconds>(t2end-t1start).count();
 
-       // cout << "time in milliseconds for protocol: " << duration << endl;
+        cout << "time in milliseconds for protocol: " << duration << endl;
     }
 
 
@@ -479,21 +479,19 @@ void ProtocolParty<FieldType>::runOffline() {
     timer->startSubTask("preparationPhase", iteration);
     if(preparationPhase() == false) {
         if(flag_print) {
-           // cout << "cheating!!!" << '\n';
-           }
+            cout << "cheating!!!" << '\n';}
         return;
     }
     else {
         if(flag_print) {
-           // cout << "no cheating!!!" << '\n' << "finish Preparation Phase" << '\n';
-           }
+            cout << "no cheating!!!" << '\n' << "finish Preparation Phase" << '\n';}
     }
     timer->endSubTask("preparationPhase", iteration);
     auto t2 = high_resolution_clock::now();
 
     auto duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds preparationPhase: " << duration << endl;
+        cout << "time in milliseconds preparationPhase: " << duration << endl;
     }
 }
 
@@ -508,7 +506,7 @@ void ProtocolParty<FieldType>::runOnline() {
     auto duration = duration_cast<milliseconds>(t2-t1).count();
 
     if(flag_print_timings) {
-       // cout << "time in milliseconds inputPhase: " << duration << endl;
+        cout << "time in milliseconds inputPhase: " << duration << endl;
     }
 
     t1 = high_resolution_clock::now();
@@ -520,7 +518,7 @@ void ProtocolParty<FieldType>::runOnline() {
     duration = duration_cast<milliseconds>(t2-t1).count();
 
     if(flag_print_timings) {
-       // cout << "time in milliseconds verificationPhase: " << duration << endl;
+        cout << "time in milliseconds verificationPhase: " << duration << endl;
     }
 
     t1 = high_resolution_clock::now();
@@ -532,7 +530,7 @@ void ProtocolParty<FieldType>::runOnline() {
     duration = duration_cast<milliseconds>(t2-t1).count();
 
     if(flag_print_timings) {
-       // cout << "time in milliseconds outputPhase: " << duration << endl;
+        cout << "time in milliseconds outputPhase: " << duration << endl;
     }
 
     //t.join();
@@ -548,7 +546,7 @@ void ProtocolParty<FieldType>::batchConsistencyCheckOfShares(const vector<FieldT
     //print key
     if (flag_print) {
         for (int i = 0; i < key.size(); i++) {
-           // cout << "key[" << i << "] for party :" << m_partyId << "is : " << (int) key[i] << endl;
+            cout << "key[" << i << "] for party :" << m_partyId << "is : " << (int) key[i] << endl;
         }
     }
 
@@ -647,12 +645,12 @@ void ProtocolParty<FieldType>::generateRandomShares(int numOfRandoms, vector<Fie
         for (int i = 0; i < N; i++) {
             for (int k = 0; k < sendBufsElements[0].size(); k++) {
 
-                //// cout << "before roundfunction4 send to " <<i <<" element: "<< k << " " << sendBufsElements[i][k] << endl;
+                // cout << "before roundfunction4 send to " <<i <<" element: "<< k << " " << sendBufsElements[i][k] << endl;
             }
         }
-       // cout << "sendBufs" << endl;
-       // cout << "N" << N << endl;
-       // cout << "T" << T << endl;
+        cout << "sendBufs" << endl;
+        cout << "N" << N << endl;
+        cout << "T" << T << endl;
     }
 
     roundFunctionSyncElements(sendBufsElements, recBufsElements, 4);
@@ -714,7 +712,7 @@ void ProtocolParty<FieldType>::generateRandom2TAndTShares(int numOfRandomPairs, 
 
     auto duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds header: " << duration << endl;
+        cout << "time in milliseconds header: " << duration << endl;
     }
      t1 = high_resolution_clock::now();
 
@@ -737,7 +735,7 @@ void ProtocolParty<FieldType>::generateRandom2TAndTShares(int numOfRandomPairs, 
 
      duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds calcSendBufElements: " << duration << endl;
+        cout << "time in milliseconds calcSendBufElements: " << duration << endl;
     }
 
 
@@ -749,7 +747,7 @@ void ProtocolParty<FieldType>::generateRandom2TAndTShares(int numOfRandomPairs, 
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds round function: " << duration << endl;
+        cout << "time in milliseconds round function: " << duration << endl;
     }
 
     t1 = high_resolution_clock::now();
@@ -770,7 +768,7 @@ void ProtocolParty<FieldType>::generateRandom2TAndTShares(int numOfRandomPairs, 
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds calcRecBufElements: " << duration << endl;
+        cout << "time in milliseconds calcRecBufElements: " << duration << endl;
     }
 
     //check validity of the t-shares. 2t-shares do not have to be checked
@@ -785,7 +783,7 @@ void ProtocolParty<FieldType>::generateRandom2TAndTShares(int numOfRandomPairs, 
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds copy: " << duration << endl;
+        cout << "time in milliseconds copy: " << duration << endl;
     }
 
     t1 = high_resolution_clock::now();
@@ -795,7 +793,7 @@ void ProtocolParty<FieldType>::generateRandom2TAndTShares(int numOfRandomPairs, 
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds batch consistency: " << duration << endl;
+        cout << "time in milliseconds batch consistency: " << duration << endl;
     }
 
 }
@@ -884,7 +882,7 @@ template <class FieldType>
 void ProtocolParty<FieldType>::initializationPhase() {
     bigR.resize(1);
 
-    //// cout << "requested size is " << numClients * sqrtR * l << endl;
+    // cout << "requested size is " << numClients * sqrtR * l << endl;
 //    msgsVectorsFlat.resize(numClients*sqrtR*l);
 //    squaresVectorsFlat.resize(numClients*sqrtR*l);
 //    countersVectorsFlat.resize(numClients*sqrtR);
@@ -981,10 +979,10 @@ void ProtocolParty<FieldType>::initializationPhase() {
 
 
     if (flag_print) {
-       // cout << "matrix_for_t : " << endl;
+        cout << "matrix_for_t : " << endl;
         matrix_for_t.Print();
 
-       // cout << "matrix_for_2t : " << endl;
+        cout << "matrix_for_2t : " << endl;
         matrix_for_2t.Print();
 
     }
@@ -994,15 +992,15 @@ void ProtocolParty<FieldType>::initializationPhase() {
         auto t1 = high_resolution_clock::now();
         readclientsinputs(msgsVectorsFlat, squaresVectorsFlat, countersVectorsFlat, unitVectorsFlat);
 
-        //// cout << "msgsVectorsFlat.size(): " << msgsVectorsFlat.size() << endl;
-        //// cout << "squaresVectorsFlat.size(): " << squaresVectorsFlat.size() << endl;
-        //// cout << "countersVectorsFlat.size(): " << countersVectorsFlat.size() << endl;
-        //// cout << "unitVectorsFlat.size(): " << unitVectorsFlat.size() << endl;
+        // cout << "msgsVectorsFlat.size(): " << msgsVectorsFlat.size() << endl;
+        // cout << "squaresVectorsFlat.size(): " << squaresVectorsFlat.size() << endl;
+        // cout << "countersVectorsFlat.size(): " << countersVectorsFlat.size() << endl;
+        // cout << "unitVectorsFlat.size(): " << unitVectorsFlat.size() << endl;
 
         auto t2 = high_resolution_clock::now();
         auto duration = duration_cast<milliseconds>(t2-t1).count();
         if(flag_print_timings) {
-           // cout << "time in milliseconds read clients inputs: " << duration << endl;
+            cout << "time in milliseconds read clients inputs: " << duration << endl;
         }
     }
     else{
@@ -1021,8 +1019,8 @@ void ProtocolParty<FieldType>::initializationPhase() {
 
 
 
-   // cout <<"sqrtR = "<<sqrtR<<endl;
-   // cout <<"sqrtU = "<<sqrtU<<endl;
+    cout <<"sqrtR = "<<sqrtR<<endl;
+    cout <<"sqrtU = "<<sqrtU<<endl;
 }
 
 template <class FieldType>
@@ -1151,7 +1149,7 @@ FieldType ProtocolParty<FieldType>::reconstructShare(vector<FieldType>& x, int d
 
     if (!checkConsistency(x, d))
         exit(-1);
-//       // cout << "cheating reconstruct!!!" << endl;
+//        cout << "cheating reconstruct!!!" << endl;
     else
         return interpolate(x);
 }
@@ -1303,7 +1301,7 @@ void ProtocolParty<FieldType>::readclientsinputs(vector<FieldType> &msgsVectorsF
         readServerFile(string(getenv("HOME")) + "/files"+to_string(numClients) + "/server" + to_string(m_partyId) + "ForClient" + to_string(i) + "inputs.bin", msgsVectorsFlat.data() +i*sqrtR*l, squaresVectorsFlat.data() +i*sqrtR*l, countersVectorsFlat.data() +i*sqrtR, unitVectorsFlat.data() + i*sqrtU, &e);
 
         if(i%10000==0) {
-           // cout<<i<<endl;
+            cout<<i<<endl;
         }
     }
 
@@ -1330,22 +1328,22 @@ void ProtocolParty<FieldType>::readServerFile(string fileName, FieldType* msg, F
 
         inputFile.read((char*)&e, 4);
 
-        //// cout << "file read success" << endl;
+        cout << "file read success" << endl;
 
         inputFile.close();
     }
     else {
-        // std::cout << "Failed to open the file: " << fileName << std::endl;
+        std::cout << "Failed to open the file: " << fileName << std::endl;
     }
 
-    // std::ifstream file(fileName, std::ios::binary | std::ios::ate);
-    // if (file.is_open()) {
-    //     std::streampos size = file.tellg();
-    //     std::cout << "Size of the file '" << fileName << "' is: " << size << " bytes" << std::endl;
-    //     file.close();
-    // } else {
-    //     std::cout << "Failed to open the file." << std::endl;
-    // }
+    std::ifstream file(fileName, std::ios::binary | std::ios::ate);
+    if (file.is_open()) {
+        std::streampos size = file.tellg();
+        std::cout << "Size of the file '" << fileName << "' is: " << size << " bytes" << std::endl;
+        file.close();
+    } else {
+        std::cout << "Failed to open the file." << std::endl;
+    }
 
 }
 
@@ -1370,7 +1368,7 @@ void ProtocolParty<FieldType>::readServerFile(string fileName, FieldType* msg, F
 //
 //    auto duration = duration_cast<milliseconds>(t2-t1).count();
 //    if(flag_print_timings) {
-//       // cout << "time in milliseconds generatePseudoRandomElements: " << duration << endl;
+//        cout << "time in milliseconds generatePseudoRandomElements: " << duration << endl;
 //    }
 //    vector<FieldType> sumXandSqaure(batchSize*l*2);
 //
@@ -1392,8 +1390,8 @@ void ProtocolParty<FieldType>::readServerFile(string fileName, FieldType* msg, F
 //        sizeForEachThread = (batchSize + numThreads - 1)/ numThreads;
 //    }
 //
-//   // cout<<"numThreads is " <<numThreads<<endl;
-//   // cout<<"num buckets " <<batchSize<<endl;
+//    cout<<"numThreads is " <<numThreads<<endl;
+//    cout<<"num buckets " <<batchSize<<endl;
 //
 //    //prepareForUnitTest(randomElements, msgsVectors, sumXandSqaure, msgsVectorsForUnitTest);
 //
@@ -1445,7 +1443,7 @@ void ProtocolParty<FieldType>::readServerFile(string fileName, FieldType* msg, F
 //
 //    duration = duration_cast<milliseconds>(t2-t1).count();
 //    if(flag_print_timings) {
-//       // cout << "time in milliseconds preparing for unit test: " << duration << endl;
+//        cout << "time in milliseconds preparing for unit test: " << duration << endl;
 //    }
 //    //before running the unit test for the compacted message compute the following for every client
 //    //1. sumx*sumx
@@ -1456,14 +1454,14 @@ void ProtocolParty<FieldType>::readServerFile(string fileName, FieldType* msg, F
 //
 //    t1 = high_resolution_clock::now();
 //
-//   // cout<< "size of mult in validate is : "<<batchSize*l<<endl;
+//    cout<< "size of mult in validate is : "<<batchSize*l<<endl;
 //
 //    DNHonestMultiplication(sumXandSqaure.data(), sumXandSqaure.data(), calculatedSqaures,batchSize*l);
 //
 //    t2 = high_resolution_clock::now();
 //    duration = duration_cast<milliseconds>(t2-t1).count();
 //    if(flag_print_timings) {
-//       // cout << "time in milliseconds DNHonestMultiplication sumXandSqaure: " << duration << endl;
+//        cout << "time in milliseconds DNHonestMultiplication sumXandSqaure: " << duration << endl;
 //    }
 //    //concatenate the calculated sqares to multiply with bigR
 //    sumXandSqaure.insert( sumXandSqaure.end(), calculatedSqaures.begin(), calculatedSqaures.end() );
@@ -1504,7 +1502,7 @@ int ProtocolParty<FieldType>::validMsgsTestFlat(vector<FieldType> &msgsVectors, 
 
     auto duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds generatePseudoRandomElements: " << duration << endl;
+        cout << "time in milliseconds generatePseudoRandomElements: " << duration << endl;
     }
     vector<FieldType> sumXandSqaure(batchSize*l*2);
 
@@ -1526,8 +1524,8 @@ int ProtocolParty<FieldType>::validMsgsTestFlat(vector<FieldType> &msgsVectors, 
         sizeForEachThread = (batchSize + numThreads - 1)/ numThreads;
     }
     vector<thread> threads(numThreads);
-   // cout<<"numThreads is " <<numThreads<<endl;
-   // cout<<"num buckets " <<batchSize<<endl;
+    cout<<"numThreads is " <<numThreads<<endl;
+    cout<<"num buckets " <<batchSize<<endl;
 
     //prepareForUnitTest(randomElements, msgsVectors, sumXandSqaure, msgsVectorsForUnitTest);
 
@@ -1551,7 +1549,7 @@ int ProtocolParty<FieldType>::validMsgsTestFlat(vector<FieldType> &msgsVectors, 
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds preparing for unit test: " << duration << endl;
+        cout << "time in milliseconds preparing for unit test: " << duration << endl;
     }
     //before running the unit test for the compacted message compute the following for every client
     //1. sumx*sumx
@@ -1562,14 +1560,14 @@ int ProtocolParty<FieldType>::validMsgsTestFlat(vector<FieldType> &msgsVectors, 
 
     t1 = high_resolution_clock::now();
 
-   // cout<< "size of mult in validate is : "<<batchSize*l<<endl;
+    cout<< "size of mult in validate is : "<<batchSize*l<<endl;
 
     DNHonestMultiplication(sumXandSqaure.data(), sumXandSqaure.data(), calculatedSqaures,batchSize*l);
 
     t2 = high_resolution_clock::now();
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds DNHonestMultiplication sumXandSqaure: " << duration << endl;
+        cout << "time in milliseconds DNHonestMultiplication sumXandSqaure: " << duration << endl;
     }
     //concatenate the calculated sqares to multiply with bigR
     sumXandSqaure.insert( sumXandSqaure.end(), calculatedSqaures.begin(), calculatedSqaures.end() );
@@ -1585,7 +1583,7 @@ int ProtocolParty<FieldType>::validMsgsTestFlat(vector<FieldType> &msgsVectors, 
 
     t1 = high_resolution_clock::now();
 
-   // cout<< "size of mult in validate is : "<<sumXandSqaure.size()<<endl;
+    cout<< "size of mult in validate is : "<<sumXandSqaure.size()<<endl;
 
 
     DNHonestMultiplication(sumXandSqaure.data(), bigRVec.data(), RTimesSumXandSqaure,sumXandSqaure.size());
@@ -1593,7 +1591,7 @@ int ProtocolParty<FieldType>::validMsgsTestFlat(vector<FieldType> &msgsVectors, 
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds DNHonestMultiplication RTimesSumXandSqaure: " << duration << endl;
+        cout << "time in milliseconds DNHonestMultiplication RTimesSumXandSqaure: " << duration << endl;
     }
 
 
@@ -1646,11 +1644,11 @@ int ProtocolParty<FieldType>::validMsgsTestFlat(vector<FieldType> &msgsVectors, 
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds unitVectorsTest 1: " << duration << endl;
+        cout << "time in milliseconds unitVectorsTest 1: " << duration << endl;
     }
 
     
-   // cout<<"flag after first unit test is "<<flag<<endl;
+    cout<<"flag after first unit test is "<<flag<<endl;
 
     if(flag==-1) //all vectors passed the test
 
@@ -1672,7 +1670,7 @@ int ProtocolParty<FieldType>::validMsgsTestFlat(vector<FieldType> &msgsVectors, 
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds unitVectorsTest 2: " << duration << endl;
+        cout << "time in milliseconds unitVectorsTest 2: " << duration << endl;
     }
 
     //do the same check for the unit vectors
@@ -1926,7 +1924,7 @@ void ProtocolParty<FieldType>::splitShiftFlat(vector<FieldType> &msgsVectors, ve
                 string command = "umount " + dir;
                 int check = system(command.c_str());
                 if (!check) {
-                   // cout << "umount succeeded" << endl;
+                    cout << "umount succeeded" << endl;
                 } else {
                     printf("Error : Failed to umount %s\n"
                            "Reason: %s [%d]\n",
@@ -1935,7 +1933,7 @@ void ProtocolParty<FieldType>::splitShiftFlat(vector<FieldType> &msgsVectors, ve
                 command = "rm -rf " + dir;
                 check = system(command.c_str());
                 if (!check) {
-                   // cout << "dir termination succeeded" << endl;
+                    cout << "dir termination succeeded" << endl;
                 } else {
                     printf("Error : Failed to terminate dir %s\n"
                            "Reason: %s [%d]\n",
@@ -2545,12 +2543,12 @@ void ProtocolParty<FieldType>::reduceMatrix(vector<long> & outputDouble, int new
 //        }
 //
 //    }
-////   // cout<<"output double:"<<endl;
+////    cout<<"output double:"<<endl;
 ////    for(int rowIndex = 0; rowIndex<newNumRows; rowIndex++) { //go over each row
 ////        for (int colIndex = 0; colIndex < newNumCols; colIndex++) {//go over each message
-////           // cout<<outputDouble[rowIndex * newNumCols  + colIndex] << " ";
+////            cout<<outputDouble[rowIndex * newNumCols  + colIndex] << " ";
 ////        }
-////       // cout<<endl;
+////        cout<<endl;
 ////    }
 //
 //    auto t1 = high_resolution_clock::now();
@@ -2578,15 +2576,15 @@ void ProtocolParty<FieldType>::reduceMatrix(vector<long> & outputDouble, int new
 //
 //    auto duration = duration_cast<milliseconds>(t2-t1).count();
 //    if(flag_print_timings) {
-//       // cout << "time in milliseconds copy output: " << duration << endl;
+//        cout << "time in milliseconds copy output: " << duration << endl;
 //    }
-////   // cout<<"output:"<<endl;
+////    cout<<"output:"<<endl;
 ////    for(int rowIndex = 0; rowIndex<numOfRows; rowIndex++) { //go over each row
 ////
 ////        for (int colIndex = 0; colIndex < numOfCols; colIndex++) {//go over each message
-////           // cout<<output[rowIndex * numOfCols  + colIndex] << " ";
+////            cout<<output[rowIndex * numOfCols  + colIndex] << " ";
 ////        }
-////       // cout<<endl;
+////        cout<<endl;
 ////    }
 //}
 
@@ -2632,7 +2630,7 @@ void ProtocolParty<FieldType>::multiplyVectorsWithThreadsFlat(vector<FieldType> 
 
     auto end = high_resolution_clock::now();
     auto duration = duration_cast<milliseconds>(end-start).count();
-   // cout << "create matrices took: " << duration << endl;
+    cout << "create matrices took: " << duration << endl;
 
     start = high_resolution_clock::now();
 
@@ -2650,7 +2648,7 @@ void ProtocolParty<FieldType>::multiplyVectorsWithThreadsFlat(vector<FieldType> 
 
     end = high_resolution_clock::now();
     duration = duration_cast<milliseconds>(end-start).count();
-   // cout << "all threads work took: " << duration << endl;
+    cout << "all threads work took: " << duration << endl;
 
     start = high_resolution_clock::now();
     for(int t=0; t<numThreads; t++){//go over each client
@@ -2706,7 +2704,7 @@ void ProtocolParty<FieldType>::multiplyVectorsWithThreadsFlat(vector<FieldType> 
         toReduce ++;
 
 //        if (toReduce == 32 || t == numThreads - 1){
-//           // cout<<"in reduce"<<endl;
+//            cout<<"in reduce"<<endl;
 //            //reduce all matrix
             reduceMatrix((vector<long>&)outputDouble, newNumRows, newNumCols, mask, p);
             toReduce = 0;
@@ -2716,13 +2714,13 @@ void ProtocolParty<FieldType>::multiplyVectorsWithThreadsFlat(vector<FieldType> 
 
     end = high_resolution_clock::now();
     duration = duration_cast<milliseconds>(end-start).count();
-   // cout << "reduce took: " << duration << endl;
-//   // cout<<"output double:"<<endl;
+    cout << "reduce took: " << duration << endl;
+//    cout<<"output double:"<<endl;
 //    for(int rowIndex = 0; rowIndex<newNumRows; rowIndex++) { //go over each row
 //        for (int colIndex = 0; colIndex < newNumCols; colIndex++) {//go over each message
-//           // cout<<outputDouble[rowIndex * newNumCols  + colIndex] << " ";
+//            cout<<outputDouble[rowIndex * newNumCols  + colIndex] << " ";
 //        }
-//       // cout<<endl;
+//        cout<<endl;
 //    }
 
     auto t1 = high_resolution_clock::now();
@@ -2750,15 +2748,15 @@ void ProtocolParty<FieldType>::multiplyVectorsWithThreadsFlat(vector<FieldType> 
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds copy output: " << duration << endl;
+        cout << "time in milliseconds copy output: " << duration << endl;
     }
-//   // cout<<"output:"<<endl;
+//    cout<<"output:"<<endl;
 //    for(int rowIndex = 0; rowIndex<numOfRows; rowIndex++) { //go over each row
 //
 //        for (int colIndex = 0; colIndex < numOfCols; colIndex++) {//go over each message
-//           // cout<<output[rowIndex * numOfCols  + colIndex] << " ";
+//            cout<<output[rowIndex * numOfCols  + colIndex] << " ";
 //        }
-//       // cout<<endl;
+//        cout<<endl;
 //    }
 //numThreads=4;
 }
@@ -2857,7 +2855,7 @@ void ProtocolParty<FieldType>::generateRandomShiftingindices(vector<int> &random
 
     }
 
-   // cout<<"counter 0 is "<< counter0<< "counter 0U is "<< counter0U<<"counter both is "<< counterBoth<<" counter non-zero is "<<counterNon0<<endl;
+    cout<<"counter 0 is "<< counter0<< "counter 0U is "<< counter0U<<"counter both is "<< counterBoth<<" counter non-zero is "<<counterNon0<<endl;
 
 }
 template <class FieldType>
@@ -2915,7 +2913,7 @@ int ProtocolParty<FieldType>::generateClearMatricesForTesting(vector<FieldType> 
 
     auto duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds commit on matrices: " << duration << endl;
+        cout << "time in milliseconds commit on matrices: " << duration << endl;
     }
     //compute just the open mats for debuging purpuses
 
@@ -2948,10 +2946,10 @@ int ProtocolParty<FieldType>::generateClearMatricesForTesting(vector<FieldType> 
 
 
 //    for(int i=0; i<accMsgsMatOpened.size(); i++) {
-//       // cout << "value " << i << " is " << accMsgsMatOpened[i] << endl;
+//        cout << "value " << i << " is " << accMsgsMatOpened[i] << endl;
 //    }
 //    for(int i=0; i<accCountersMat.size(); i++) {
-//       // cout << "counter num " << i << " is " << accCountersMat[i] << endl;
+//        cout << "counter num " << i << " is " << accCountersMat[i] << endl;
 //    }
 
     t1 = high_resolution_clock::now();
@@ -2983,7 +2981,7 @@ int ProtocolParty<FieldType>::generateClearMatricesForTesting(vector<FieldType> 
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in milliseconds second hash: " << duration << endl;
+        cout << "time in milliseconds second hash: " << duration << endl;
     }
 
     return -1;
@@ -3022,10 +3020,10 @@ int ProtocolParty<FieldType>::generateClearMatrices(vector<FieldType> &accMats, 
 
 
     for(int i=0; i<accMatOpened.size(); i++) {
-       // cout << "value " << i << " is " << accMatOpened[i] << endl;
+        cout << "value " << i << " is " << accMatOpened[i] << endl;
     }
     for(int i=0; i<accFieldCountersMatOpened.size(); i++) {
-       // cout << "counter num " << i << " is " << accFieldCountersMatOpened[i] << endl;
+        cout << "counter num " << i << " is " << accFieldCountersMatOpened[i] << endl;
     }
 
     OpenSSLSHA256 hash;
@@ -3067,21 +3065,21 @@ void ProtocolParty<FieldType>::printOutputMessagesForTesting(vector<FieldType> &
     for(int i=0; i<accIntCountersMat.size(); i++){
 
         if(i%10000==0) {
-           // cout << "accIntCountersMat[" << i << "]" << accIntCountersMat[i] << endl;
+            cout << "accIntCountersMat[" << i << "]" << accIntCountersMat[i] << endl;
             if (accIntCountersMat[i] == 1) {
                 for (int l1 = 0; l1 < l; l1++) {
-                   // cout << "\033[1;31mmessage #" << counter << " is " << accMsgsMat[l * i + l1] << "\033[0m" << endl;
+                    cout << "\033[1;31mmessage #" << counter << " is " << accMsgsMat[l * i + l1] << "\033[0m" << endl;
                 }
                 counter++;
             } else if (accIntCountersMat[i] == 2) {
 
                 for (int l1 = 0; l1 < l; l1++) {
-                   // cout << "\033[1;31mmessage #" << counter << " is " << accMsgsMat[l * i + l1] << "\033[0m" << endl;
+                    cout << "\033[1;31mmessage #" << counter << " is " << accMsgsMat[l * i + l1] << "\033[0m" << endl;
                 }
                 counter++;
 
                 for (int l1 = 0; l1 < l; l1++) {
-                   // cout << "\033[1;31mmessage #" << counter << " is " << accMsgsMat2[l * i + l1] << "\033[0m" << endl;
+                    cout << "\033[1;31mmessage #" << counter << " is " << accMsgsMat2[l * i + l1] << "\033[0m" << endl;
                 }
                 counter++;
 
@@ -3109,10 +3107,10 @@ void ProtocolParty<FieldType>::extractMessagesForTesting(vector<FieldType> &accM
     }
 
     if (totalNumber > numClients){
-       // cout<<"CHEATING total counter number!!!"<<endl;
+        cout<<"CHEATING total counter number!!!"<<endl;
     }
 
-   // cout<<"sqrtR" <<sqrtR<<endl;
+    cout<<"sqrtR" <<sqrtR<<endl;
 }
 
 
@@ -3122,11 +3120,11 @@ void ProtocolParty<FieldType>::calcPairMessages(FieldType & a, FieldType & b, in
     //If there is no element in this index, check that both values are zero.
     if (counter == 0){
         if (a != *(field->GetZero()) || b != *(field->GetZero())){
-           // cout<<"CHEATING counter == 0!!!"<<endl;
-           // cout<<"a = "<<a<<endl;
-           // cout<<"b = "<<b<<endl;
-           // cout<<"i = "<<i<<endl;
-           // cout<<"j = "<<j<<endl;
+            cout<<"CHEATING counter == 0!!!"<<endl;
+            cout<<"a = "<<a<<endl;
+            cout<<"b = "<<b<<endl;
+            cout<<"i = "<<i<<endl;
+            cout<<"j = "<<j<<endl;
         }
         //If there is one element in this index, check that x = x^2.
     } else if (counter == 1){
@@ -3134,9 +3132,9 @@ void ProtocolParty<FieldType>::calcPairMessages(FieldType & a, FieldType & b, in
         if (b == temp){
             b = *(field->GetZero());
         } else {
-           // cout<<"CHEATING counter == 1!!!"<<endl;
-           // cout<<"i = "<<i<<endl;
-           // cout<<"j = "<<j<<endl;
+            cout<<"CHEATING counter == 1!!!"<<endl;
+            cout<<"i = "<<i<<endl;
+            cout<<"j = "<<j<<endl;
         }
         //If there are two elements in this index, calculate them
     } else if (counter == 2){
@@ -3187,7 +3185,7 @@ int ProtocolParty<FieldType>::verificationPhase() {
 //    auto flag =  validMsgsTest(msgsVectors, unitVectors);
     auto flag =  validMsgsTestFlat((vector<FieldType>&)msgsVectorsFlat, (vector<FieldType>&)squaresVectorsFlat, (vector<FieldType>&)countersVectorsFlat, (vector<FieldType>&)unitVectorsFlat);
 
-   // cout<<"flag is : "<<flag<<endl;
+    cout<<"flag is : "<<flag<<endl;
 
     return flag;
 
@@ -3306,7 +3304,7 @@ void ProtocolParty<FieldType>::generatePseudoRandomElements(vector<byte> & aesKe
     }
 
     if (flag_print) {
-       // cout << "size is" << size << "for party : " << m_partyId;
+        cout << "size is" << size << "for party : " << m_partyId;
     }
 
 
@@ -3354,7 +3352,7 @@ void ProtocolParty<FieldType>::outputPhase()
 
     auto duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings)
-       // cout << "time in miliseconds generateSharedMatricesOptimized: " << duration << endl;
+        cout << "time in miliseconds generateSharedMatricesOptimized: " << duration << endl;
 
     t1 = high_resolution_clock::now();
     timer->startSubTask("extractMessagesForTesting", iteration);
@@ -3369,19 +3367,19 @@ void ProtocolParty<FieldType>::outputPhase()
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in miliseconds generateClearMatricesForTesting: " << duration << endl;
+        cout << "time in miliseconds generateClearMatricesForTesting: " << duration << endl;
     }
 
 
-   // cout<<"flag for clear is "<<flag<<endl;
+    cout<<"flag for clear is "<<flag<<endl;
 
     if(flag==-1){
 
-       // cout<<"all hashes are correct"<<endl;
+        cout<<"all hashes are correct"<<endl;
     }
     else
     {
-       // cout<<"basssssssssssssssssa you " <<flag <<endl;
+        cout<<"basssssssssssssssssa you " <<flag <<endl;
 
     }
 
@@ -3395,7 +3393,7 @@ void ProtocolParty<FieldType>::outputPhase()
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in miliseconds extractMessagesForTesting: " << duration << endl;
+        cout << "time in miliseconds extractMessagesForTesting: " << duration << endl;
     }
 
 
@@ -3407,10 +3405,10 @@ void ProtocolParty<FieldType>::outputPhase()
 
     duration = duration_cast<milliseconds>(t2-t1).count();
     if(flag_print_timings) {
-       // cout << "time in miliseconds printOutputMessagesForTesting: " << duration << endl;
+        cout << "time in miliseconds printOutputMessagesForTesting: " << duration << endl;
     }
 
-   // cout<<"passed with distinction"<<endl;
+    cout<<"passed with distinction"<<endl;
 }
 
 template <class FieldType>
@@ -3572,7 +3570,7 @@ ProtocolParty<FieldType>::~ProtocolParty()
     comm.printNetworkStats(parties, partyID, arguments);
     if(timer != nullptr)
         delete timer;
-   // cout << "timer deleted" << endl;
+    cout << "timer deleted" << endl;
 }
 
 
