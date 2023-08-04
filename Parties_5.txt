@@ -1,8 +1,8 @@
-party_0_ip = 3.128.76.248
-party_1_ip = 18.224.3.64
-party_2_ip = 18.191.5.190
-party_3_ip = 3.143.242.106
-party_4_ip = 3.15.162.201
+party_0_ip = 18.116.70.88
+party_1_ip = 35.180.204.216
+party_2_ip = 54.177.151.14
+party_3_ip = 52.196.213.17
+party_4_ip = 34.219.28.135
 party_0_port = 9000
 party_1_port = 9000
 party_2_port = 9000
